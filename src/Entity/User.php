@@ -2,16 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *  normalizationContext = {"groups"= {"users_read"}}
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -21,19 +28,28 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"users_read"})
      */
-    private $firstname;
+    private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     * @Groups({"users_read"})
+     */
+    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"users_read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"users_read"})
      */
-    private $email;
+    private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,42 +57,26 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=PlaylistUser::class, mappedBy="userId")
+     * @ORM\Column(type="datetime")
+     * @Groups({"users_read"})
+     */
+    private $created_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PlaylistUser::class, mappedBy="userId", orphanRemoval=true)
      */
     private $playlistUsers;
 
     public function __construct()
     {
+        $this->roles = array('ROLE_USER');
+        $this->created_at = new \DateTime('now');
         $this->playlistUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -91,14 +91,99 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed for apps that do not check user passwords
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
     }
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -123,8 +208,7 @@ class User
 
     public function removePlaylistUser(PlaylistUser $playlistUser): self
     {
-        if ($this->playlistUsers->contains($playlistUser)) {
-            $this->playlistUsers->removeElement($playlistUser);
+        if ($this->playlistUsers->removeElement($playlistUser)) {
             // set the owning side to null (unless already changed)
             if ($playlistUser->getUserId() === $this) {
                 $playlistUser->setUserId(null);
