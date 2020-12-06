@@ -71,6 +71,7 @@ class User implements UserInterface
     {
         $this->roles = array('ROLE_USER');
         $this->created_at = new \DateTime('now');
+        
         $this->playlistUsers = new ArrayCollection();
     }
 
