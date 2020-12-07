@@ -24,9 +24,6 @@ const Navbar = (props) => {
           <a className="nav-link" href="#">Les tendances YouTube</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Liste des Utilisateurs</a>
-        </li>
-        <li className="nav-item">
           <a className="nav-link" href="#">Contact</a>
         </li>
       </ul>
