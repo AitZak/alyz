@@ -33,7 +33,7 @@ class Track
     private $isrc;
 
     /**
-     * @ORM\ManyToMany(targetEntity=TracksPlaylistCurator::class, mappedBy="trackId")
+     * @ORM\OneToMany(targetEntity=TracksPlaylistCurator::class, mappedBy="trackId")
      */
     private $tracksPlaylistCurators;
 
@@ -47,11 +47,18 @@ class Track
      */
     private $sings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TracksPlaylistUser::class, mappedBy="track")
+     */
+    private $tracksPlaylistUsers;
+
+
     public function __construct()
     {
         $this->tracksPlaylistCurators = new ArrayCollection();
         $this->tracksCharts = new ArrayCollection();
         $this->sings = new ArrayCollection();
+        $this->tracksPlaylistUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,4 +179,35 @@ class Track
 
         return $this;
     }
+
+    /**
+     * @return Collection|TracksPlaylistUser[]
+     */
+    public function getTracksPlaylistUsers(): Collection
+    {
+        return $this->tracksPlaylistUsers;
+    }
+
+    public function addTracksPlaylistUser(TracksPlaylistUser $tracksPlaylistUser): self
+    {
+        if (!$this->tracksPlaylistUsers->contains($tracksPlaylistUser)) {
+            $this->tracksPlaylistUsers[] = $tracksPlaylistUser;
+            $tracksPlaylistUser->setTrack($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTracksPlaylistUser(TracksPlaylistUser $tracksPlaylistUser): self
+    {
+        if ($this->tracksPlaylistUsers->removeElement($tracksPlaylistUser)) {
+            // set the owning side to null (unless already changed)
+            if ($tracksPlaylistUser->getTrack() === $this) {
+                $tracksPlaylistUser->setTrack(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -32,20 +32,17 @@ class TracksPlaylistCurator
      */
     private $position;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $publicationDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Track::class, inversedBy="tracksPlaylistCurators")
+     * @ORM\ManyToOne(targetEntity=Track::class, inversedBy="tracksPlaylistCurators")
      */
     private $trackId;
 
-    public function __construct()
-    {
-        $this->trackId = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $publicationDate;
+
 
     public function getId(): ?int
     {
@@ -76,41 +73,29 @@ class TracksPlaylistCurator
         return $this;
     }
 
+
+    public function getTrackId(): ?Track
+    {
+        return $this->trackId;
+    }
+
+    public function setTrackId(?Track $trackId): self
+    {
+        $this->trackId = $trackId;
+
+        return $this;
+    }
+
     public function getPublicationDate(): ?string
     {
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(string $publicationDate): self
+    public function setPublicationDate(?string $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Track[]
-     */
-    public function getTrackId(): Collection
-    {
-        return $this->trackId;
-    }
-
-    public function addTrackId(Track $trackId): self
-    {
-        if (!$this->trackId->contains($trackId)) {
-            $this->trackId[] = $trackId;
-        }
-
-        return $this;
-    }
-
-    public function removeTrackId(Track $trackId): self
-    {
-        if ($this->trackId->contains($trackId)) {
-            $this->trackId->removeElement($trackId);
-        }
-
-        return $this;
-    }
 }

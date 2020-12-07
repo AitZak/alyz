@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CuratorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -30,6 +32,16 @@ class Curator
      */
     private $platformMusicId;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PlaylistCurator::class, mappedBy="curatorId")
+     */
+    private $playlists;
+
+    public function __construct()
+    {
+        $this->playlists = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +67,36 @@ class Curator
     public function setPlatformMusicId(?PlatformMusic $platformMusicId): self
     {
         $this->platformMusicId = $platformMusicId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PlaylistCurator[]
+     */
+    public function getPlaylists(): Collection
+    {
+        return $this->playlists;
+    }
+
+    public function addPlaylist(PlaylistCurator $playlist): self
+    {
+        if (!$this->playlists->contains($playlist)) {
+            $this->playlists[] = $playlist;
+            $playlist->setCuratorId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylist(PlaylistCurator $playlist): self
+    {
+        if ($this->playlists->removeElement($playlist)) {
+            // set the owning side to null (unless already changed)
+            if ($playlist->getCuratorId() === $this) {
+                $playlist->setCuratorId(null);
+            }
+        }
 
         return $this;
     }

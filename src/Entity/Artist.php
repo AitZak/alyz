@@ -32,10 +32,17 @@ class Artist
      */
     private $sings;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="followed_artist")
+     */
+    private $follower;
+
     public function __construct()
     {
+        $this->follower = new ArrayCollection();
         $this->sings = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -84,4 +91,29 @@ class Artist
 
         return $this;
     }
+
+    /**
+     * @return Collection|user[]
+     */
+    public function getFollower(): Collection
+    {
+        return $this->follower;
+    }
+
+    public function addFollower(user $follower): self
+    {
+        if (!$this->follower->contains($follower)) {
+            $this->follower[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(user $follower): self
+    {
+        $this->follower->removeElement($follower);
+
+        return $this;
+    }
+
 }

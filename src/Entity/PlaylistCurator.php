@@ -33,14 +33,15 @@ class PlaylistCurator
     private $idInPlatform;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $curatorId;
-
-    /**
      * @ORM\OneToMany(targetEntity=TracksPlaylistCurator::class, mappedBy="playlistCuratorId")
      */
     private $tracksPlaylistCurators;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Curator::class, inversedBy="playlists")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $curatorId;
 
     public function __construct()
     {
@@ -76,18 +77,6 @@ class PlaylistCurator
         return $this;
     }
 
-    public function getCuratorId(): ?int
-    {
-        return $this->curatorId;
-    }
-
-    public function setCuratorId(int $curatorId): self
-    {
-        $this->curatorId = $curatorId;
-
-        return $this;
-    }
-
     /**
      * @return Collection|TracksPlaylistCurator[]
      */
@@ -115,6 +104,18 @@ class PlaylistCurator
                 $tracksPlaylistCurator->setPlaylistCuratorId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCuratorId(): ?Curator
+    {
+        return $this->curatorId;
+    }
+
+    public function setCuratorId(?Curator $curatorId): self
+    {
+        $this->curatorId = $curatorId;
 
         return $this;
     }

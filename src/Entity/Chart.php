@@ -23,12 +23,17 @@ class Chart
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
      * @ORM\ManyToOne(targetEntity=PlatformMusic::class, inversedBy="charts")
      */
     private $platformMusicId;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Country::class, inversedBy="charts")
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="charts")
      */
     private $countryId;
 
@@ -39,7 +44,6 @@ class Chart
 
     public function __construct()
     {
-        $this->countryId = new ArrayCollection();
         $this->tracksCharts = new ArrayCollection();
     }
 
@@ -60,28 +64,26 @@ class Chart
         return $this;
     }
 
-    /**
-     * @return Collection|Country[]
-     */
-    public function getCountryId(): Collection
+    public function getName(): ?string
     {
-        return $this->countryId;
+        return $this->name;
     }
 
-    public function addCountryId(Country $countryId): self
+    public function setName(string $name): self
     {
-        if (!$this->countryId->contains($countryId)) {
-            $this->countryId[] = $countryId;
-        }
+        $this->name = $name;
 
         return $this;
     }
 
-    public function removeCountryId(Country $countryId): self
+    public function getCountryId(): ?string
     {
-        if ($this->countryId->contains($countryId)) {
-            $this->countryId->removeElement($countryId);
-        }
+        return $this->countryId;
+    }
+
+    public function setCountryId(string $countryId): self
+    {
+        $this->countryId = $countryId;
 
         return $this;
     }
