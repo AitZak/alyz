@@ -37,10 +37,16 @@ class PlatformMusic
      */
     private $charts;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="subscribedPlatforms")
+     */
+    private $subscriber;
+
     public function __construct()
     {
         $this->curators = new ArrayCollection();
         $this->charts = new ArrayCollection();
+        $this->subscriber = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +124,30 @@ class PlatformMusic
                 $chart->setPlatformMusicId(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|user[]
+     */
+    public function getSubscriber(): Collection
+    {
+        return $this->subscriber;
+    }
+
+    public function addSubscriber(user $subscriber): self
+    {
+        if (!$this->subscriber->contains($subscriber)) {
+            $this->subscriber[] = $subscriber;
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriber(user $subscriber): self
+    {
+        $this->subscriber->removeElement($subscriber);
 
         return $this;
     }

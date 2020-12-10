@@ -36,9 +36,10 @@ class TracksChart
     private $position;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $publicationDate;
+    private $publication_date;
+
 
     public function getId(): ?int
     {
@@ -83,13 +84,15 @@ class TracksChart
 
     public function getPublicationDate(): ?string
     {
-        return $this->publicationDate;
+        return $this->publication_date;
     }
 
-    public function setPublicationDate(string $publicationDate): self
+    public function setPublicationDate(?string $publication_date): self
     {
-        $this->publicationDate = $publicationDate;
+        $this->publication_date = $publication_date;
 
         return $this;
     }
+
+
 }

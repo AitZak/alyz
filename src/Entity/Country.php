@@ -28,7 +28,7 @@ class Country
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Chart::class, mappedBy="countryId")
+     * @ORM\OneToMany(targetEntity=Chart::class, mappedBy="countryId")
      */
     private $charts;
 

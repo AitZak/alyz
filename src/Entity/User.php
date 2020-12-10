@@ -67,12 +67,24 @@ class User implements UserInterface
      */
     private $playlistUsers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Artist::class, mappedBy="follower")
+     */
+    private $followed_artist;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=PlatformMusic::class, mappedBy="subscriber")
+     */
+    private $subscribedPlatforms;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
         $this->created_at = new \DateTime('now');
         
         $this->playlistUsers = new ArrayCollection();
+        $this->followed_artist = new ArrayCollection();
+        $this->subscribedPlatforms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +226,60 @@ class User implements UserInterface
             if ($playlistUser->getUserId() === $this) {
                 $playlistUser->setUserId(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Artist[]
+     */
+    public function getFollowedArtist(): Collection
+    {
+        return $this->followed_artist;
+    }
+
+    public function addFollowedArtist(Artist $followedArtist): self
+    {
+        if (!$this->followed_artist->contains($followedArtist)) {
+            $this->followed_artist[] = $followedArtist;
+            $followedArtist->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowedArtist(Artist $followedArtist): self
+    {
+        if ($this->followed_artist->removeElement($followedArtist)) {
+            $followedArtist->removeFollower($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PlatformMusic[]
+     */
+    public function getSubscribedPlatforms(): Collection
+    {
+        return $this->subscribedPlatforms;
+    }
+
+    public function addSubscribedPlatform(PlatformMusic $subscribedPlatform): self
+    {
+        if (!$this->subscribedPlatforms->contains($subscribedPlatform)) {
+            $this->subscribedPlatforms[] = $subscribedPlatform;
+            $subscribedPlatform->addSubscriber($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscribedPlatform(PlatformMusic $subscribedPlatform): self
+    {
+        if ($this->subscribedPlatforms->removeElement($subscribedPlatform)) {
+            $subscribedPlatform->removeSubscriber($this);
         }
 
         return $this;
