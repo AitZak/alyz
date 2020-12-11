@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import AuthAPI from '../services/authAPI';
+import AuthContext from '../contexts/AuthContext';
 
-const Navbar = (props) => {
+const Navbar = ({ history}) => {
+
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const handleLogout = () => {
+    AuthAPI.logout();
+    setIsAuthenticated(false);
+    history.push("/login");
+  }
+
     return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <a className="navbar-brand" href="#">ALYZ</a>
+    <NavLink className="navbar-brand" to="/">ALYZ</NavLink>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -10,30 +21,39 @@ const Navbar = (props) => {
     <div className="collapse navbar-collapse" id="navbarColor03">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <a className="nav-link" href="#">Home
+          <NavLink className="nav-link" to="/">Home
             <span className="sr-only">(current)</span>
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Les tendances Spotify</a>
+          <NavLink className="nav-link" to="#">Les tendances Spotify</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Les tendances Deezer</a>
+          <NavLink className="nav-link" to="#">Les tendances Deezer</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Les tendances YouTube</a>
+          <NavLink className="nav-link" to="#">Les tendances YouTube</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Contact</a>
+          <NavLink className="nav-link" to="/users">Les utilisateurs</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
       </ul>
       <ul className="navbar-nav ml-auto">
+        {!isAuthenticated && <>
           <li className="nav-item">
-              <a href="#" className="btn btn-default">Connexion</a>
+              <NavLink to="/register" className="btn btn-default">Inscription</NavLink>
           </li>      
           <li className="nav-item">
-              <a href="#" className="btn btn-default">Inscription</a>
+              <NavLink to="/login" className="btn btn-default">Connexion</NavLink>
           </li>
+        </> || (
+          <li className="nav-item">
+              <button onClick={handleLogout} className="btn btn-default">Déconnexion</button>
+          </li>
+        )}
       </ul>
     </div>
   </nav> );

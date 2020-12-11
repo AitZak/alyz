@@ -5,34 +5,46 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import AllUsersPage from "./pages/AllUsersPage";
-import { HashRouter, Switch, Route } from 'react-router-dom';
-
+import LoginPage from "./pages/LoginPage";
+import AuthApi from "./services/authAPI";
+import AuthContext from "./contexts/AuthContext";
+import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
-// start the Stimulus application
 
-
-
+AuthApi.setup();
 
 const App = () => {
-    return( 
+
+    const [isAuthenticated, setIsAuthenticated] = useState(AuthApi.isAuthenticated());
+
+    const NavbarWithRouter = withRouter(Navbar);
+
+    return(
+    <AuthContext.Provider value={{
+        isAuthenticated,
+        setIsAuthenticated
+    }}>
     <HashRouter>
-        <Navbar />
+        <NavbarWithRouter />
         <main className="container pt-5">
             <Switch>
+                <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
-                <Route path="/users" component={AllUsersPage} /> 
+                <PrivateRoute path="/users" component = {AllUsersPage} />
                 <Route path="/" component={HomePage} />          
             </Switch>
         </main>
     </HashRouter>
+    </AuthContext.Provider> 
     );
 };
 
