@@ -13,16 +13,18 @@ class CountryFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create('fr_FR');
 
-        //insert 5 countries
-        for ($i = 0; $i < 5; $i++) 
-        {
-            $country = new Country();
-            $country->setName($faker->country);
-            $manager->persist($country);
-        }
-            $this->addReference("country_id", $country);
-            $manager->flush();
+        $france = new Country();
+        $france->setId("fr");
+        $france->setName("france");
+        $manager->persist($france);
+        $this->addReference("iso_fr", $france);
+
+        $italie = new Country();
+        $italie->setId("it");
+        $italie->setName("italie");
+        $manager->persist($italie);
+
+        $manager->flush();
     }
 }

@@ -76,12 +76,12 @@ class Chart
         return $this;
     }
 
-    public function getCountryId(): ?string
+    public function getCountryId(): ?Country
     {
         return $this->countryId;
     }
 
-    public function setCountryId(string $countryId): self
+    public function setCountryId(?Country $countryId): self
     {
         $this->countryId = $countryId;
 
