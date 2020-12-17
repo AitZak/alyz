@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import UsersAPI from '../services/usersAPI';
+
 const AllUsersPage = props => {
 
     const [users, setUsers] = useState([]);
+
+    const fetchUsers = async () => {
+        try{
+            const data = await UsersAPI.findAll();
+            setUsers(data);
+        } catch(error) {
+            console.log(error.response);
+        }
+    }
     useEffect(()=>{
-        axios.get("http://localhost:80/api/users")
-        .then(response => response.data['hydra:member'])
-        .then(data => setUsers(data));
+        fetchUsers();
     }, []);
 
     return (

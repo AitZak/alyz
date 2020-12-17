@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         //insert 10 users
-        for ($i = 0; $i < 10; $i++) 
+        for ($i = 0; $i < 50; $i++) 
         {
             $user = new User();
             $user->setEmail("sample@example0".$i.".com");
