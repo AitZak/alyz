@@ -1,30 +1,40 @@
 <?php
 /**
- * Country Fixtures
+ * Chart Fixtures
  */
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use App\Entity\Chart;
 use App\Entity\Country;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\Validator\Constraints\Count;
 
-class CountryFixtures extends Fixture
+class ChartFixtures extends Fixture implements DependentFixtureInterface
 {
+
     public function load(ObjectManager $manager)
     {
 
-        $france = new Country();
-        $france->setId("fr");
-        $france->setName("france");
-        $manager->persist($france);
-        $this->addReference("iso_fr", $france);
 
-        $italie = new Country();
-        $italie->setId("it");
-        $italie->setName("italie");
-        $manager->persist($italie);
+        $chart = new Chart();
+        $chart->setName("top".strval(rand(49,201)));
+        $chart->setCountryId($this->getReference("iso_fr"));
+        $chart->setPlatformMusicId($this->getReference("spotify_id"));
+        $manager->persist($chart);
 
+        $this->addReference("chart_id", $chart);
         $manager->flush();
+
     }
+
+    public function getDependencies()
+    {
+        return array(
+            CountryFixtures::class,
+        );
+    }
+
 }
