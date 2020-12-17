@@ -18,6 +18,7 @@ import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import RegisterPage from './pages/RegisterPage';
 
 
 AuthApi.setup();
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
                 <PrivateRoute path="/users" component = {AllUsersPage} />
+                <Route path="/register" component = {RegisterPage} />
                 <Route path="/" component={HomePage} />          
             </Switch>
         </main>

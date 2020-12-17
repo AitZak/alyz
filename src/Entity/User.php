@@ -31,6 +31,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"users_read"})
+     * @Assert\NotBlank(message = "L'email est obligatoire")
+     * @Assert\Email(message="Le format n'est pas valide")
      */
     private $email;
 
@@ -43,17 +45,26 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users_read"})
+     * @Assert\NotBlank(message = "Le nom de famille est obligatoire")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"users_read"})
+     * @Assert\NotBlank(message = "Le prénom est obligatoire")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Le mot de passe est obligatoire")
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 16,
+     *      minMessage = "Votre mot de passe doit avoir au moins {{ limit }} caractères long",
+     *      maxMessage = "Votre mot de passe ne peut pas excéder {{ limit }} 16"
+     * )
      */
     private $password;
 
