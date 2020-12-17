@@ -17,8 +17,8 @@ class Country
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=2)
      */
     private $id;
 
@@ -27,17 +27,14 @@ class Country
      */
     private $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Chart::class, mappedBy="countryId")
-     */
-    private $charts;
-
-    public function __construct()
+    public function setId(string $id): self
     {
-        $this->charts = new ArrayCollection();
+        $this->id=$id;
+        return $this;
     }
 
-    public function getId(): ?int
+    
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -54,31 +51,5 @@ class Country
         return $this;
     }
 
-    /**
-     * @return Collection|Chart[]
-     */
-    public function getCharts(): Collection
-    {
-        return $this->charts;
-    }
-
-    public function addChart(Chart $chart): self
-    {
-        if (!$this->charts->contains($chart)) {
-            $this->charts[] = $chart;
-            $chart->addCountryId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChart(Chart $chart): self
-    {
-        if ($this->charts->contains($chart)) {
-            $this->charts->removeElement($chart);
-            $chart->removeCountryId($this);
-        }
-
-        return $this;
-    }
+    
 }
