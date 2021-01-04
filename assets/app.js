@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from "./components/Navbar";
+import Footer  from "./components/Footer"
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import AllUsersPage from "./pages/AllUsersPage";
@@ -44,9 +45,12 @@ const App = () => {
                 <Route path="/register" component = {RegisterPage} />
                 <Route path="/" component={HomePage} />          
             </Switch>
+
         </main>
+        <Footer/>
     </HashRouter>
-    </AuthContext.Provider> 
+    </AuthContext.Provider>
+
     );
 };
 

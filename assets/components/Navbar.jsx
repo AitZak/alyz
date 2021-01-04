@@ -19,7 +19,7 @@ const Navbar = ({ history}) => {
     </button>
   
     <div className="collapse navbar-collapse" id="navbarColor03">
-      <ul className="navbar-nav mr-auto">
+      <ul className="navbar-nav mr-nav navbar_title">
         <li className="nav-item active">
           <NavLink className="nav-link" to="/">Home
             <span className="sr-only">(current)</span>
@@ -41,17 +41,17 @@ const Navbar = ({ history}) => {
           <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
       </ul>
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav ">
         {!isAuthenticated && <>
-          <li className="nav-item">
-              <NavLink to="/register" className="btn btn-default">Inscription</NavLink>
+          <li className="nav-item mr-1">
+              <NavLink to="/register" className="btn space button_custum color">Inscription</NavLink>
           </li>      
-          <li className="nav-item">
-              <NavLink to="/login" className="btn btn-default">Connexion</NavLink>
+          <li className="nav-item color">
+              <NavLink to="/login" className="btn btn-default button_custum color">Connexion</NavLink>
           </li>
         </> || (
           <li className="nav-item">
-              <button onClick={handleLogout} className="btn btn-default">Déconnexion</button>
+              <button onClick={handleLogout} className="btn btn-default color">Déconnexion</button>
           </li>
         )}
       </ul>
