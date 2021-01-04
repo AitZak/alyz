@@ -1,3 +1,65 @@
-body {
-    background-color: white;
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
+
+body {
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+
+}
+
+.navbar_title{
+    font-family: 'Lobster', cursive !important;
+    font-size: 1.2rem;
+}
+
+.mr-nav{
+    margin-left: auto !important;
+}
+
+.slogan{
+    font-size: 10px;
+}
+
+.homepage_title{
+
+}
+
+.playlist_title{
+
+}
+
+.button_custum{
+    background-color: #6605E6;
+    color: white !important;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    padding: 5px 5px 5px;
+
+}
+
+.space{
+    margin-left: 20px !important;
+}
+
+.btn{
+    margin-right: 5px !important;
+}
+
+.btn:last-child{
+    margin-right: 0 !important;
+}
+
+.color{
+    color: white !important
+}
+
+.footer{
+    color: white !important;
+    font-size: 0.952rem;
+    padding: 5px 5px 5px;
+    margin: 5px 5px 5px;
+    text-decoration: none;
+}
+
