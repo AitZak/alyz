@@ -6,7 +6,11 @@ html, body {
 
 body {
     background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    background-attachment: fixed;
+}
 
+.link_color{
+    color: #000000 !important;
 }
 
 .navbar_title{
@@ -28,6 +32,10 @@ body {
 
 .playlist_title{
 
+}
+
+.logo_font{
+    font-family: 'Lobster', cursive !important;
 }
 
 .button_custum{
