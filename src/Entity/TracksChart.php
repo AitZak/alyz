@@ -6,10 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TracksChartRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource
  * @ORM\Entity(repositoryClass=TracksChartRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","trackId": "exact", "chartId": "exact", "publication_date": "exact"})
  */
 class TracksChart
 {

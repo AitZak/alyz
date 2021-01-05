@@ -10,13 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource(
  *  normalizationContext = {"groups"= {"users_read"}}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","email": "partial","firstname": "partial", "lastname": "partial"})
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
+ * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
@@ -58,13 +61,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Le mot de passe est obligatoire")
-     * @Assert\Length(
-     *      min = 6,
-     *      max = 16,
-     *      minMessage = "Votre mot de passe doit avoir au moins {{ limit }} caractères long",
-     *      maxMessage = "Votre mot de passe ne peut pas excéder {{ limit }} 16"
-     * )
      */
     private $password;
 
@@ -76,16 +72,19 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=PlaylistUser::class, mappedBy="userId", orphanRemoval=true)
+     * @Groups({"users_read"})
      */
     private $playlistUsers;
 
     /**
      * @ORM\ManyToMany(targetEntity=Artist::class, mappedBy="follower")
+     * @Groups({"users_read"})
      */
     private $followed_artist;
 
     /**
-     * @ORM\ManyToMany(targetEntity=PlatformMusic::class, mappedBy="subscriber")
+     * @ORM\ManyToMany(targetEntity=PlatformMusic::class, inversedBy="subscriber")
+     * @Groups({"users_read"})
      */
     private $subscribedPlatforms;
 
