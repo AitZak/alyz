@@ -51,7 +51,7 @@ const Navbar = ({ history}) => {
           </li>
         </> || (
           <li className="nav-item">
-              <button onClick={handleLogout} className="btn btn-default color">Déconnexion</button>
+              <button onClick={handleLogout} className="btn btn-default button_custum color">Déconnexion</button>
           </li>
         )}
       </ul>
