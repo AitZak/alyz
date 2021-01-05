@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","name": "partial"})
  * @ORM\Entity(repositoryClass=CountryRepository::class)
  */
 class Country

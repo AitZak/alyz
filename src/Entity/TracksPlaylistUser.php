@@ -6,10 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TracksPlaylistUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource
  * @ORM\Entity(repositoryClass=TracksPlaylistUserRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","track": "exact", "playlistId": "exact", "publication_date": "exact"})
  */
 class TracksPlaylistUser
 {

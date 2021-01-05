@@ -6,19 +6,29 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource
  * @ORM\Entity(repositoryClass=SingRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "artistId": "exact", "trackId": "exact"})
  */
 class Sing
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue"name": "partial"
      * @ORM\Column(type="integer")
      */
     private $id;
+
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $role;
 
     /**
      * @ORM\ManyToOne(targetEntity=Artist::class, inversedBy="sings")
@@ -30,38 +40,11 @@ class Sing
      */
     private $trackId;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $role;
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getArtistId(): ?Artist
-    {
-        return $this->artistId;
-    }
-
-    public function setArtistId(?Artist $artistId): self
-    {
-        $this->artistId = $artistId;
-
-        return $this;
-    }
-
-    public function getTrackId(): ?Track
-    {
-        return $this->trackId;
-    }
-
-    public function setTrackId(?Track $trackId): self
-    {
-        $this->trackId = $trackId;
-
-        return $this;
     }
 
     public function getRole(): ?int
@@ -72,6 +55,30 @@ class Sing
     public function setRole(int $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getArtistId(): ?artist
+    {
+        return $this->artistId;
+    }
+
+    public function setArtistId(?artist $artistId): self
+    {
+        $this->artistId = $artistId;
+
+        return $this;
+    }
+
+    public function getTrackId(): ?track
+    {
+        return $this->trackId;
+    }
+
+    public function setTrackId(?track $trackId): self
+    {
+        $this->trackId = $trackId;
 
         return $this;
     }

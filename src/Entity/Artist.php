@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ApiResource
@@ -100,7 +102,7 @@ class Artist
         return $this->follower;
     }
 
-    public function addFollower(user $follower): self
+    public function addFollower(User $follower): self
     {
         if (!$this->follower->contains($follower)) {
             $this->follower[] = $follower;
@@ -109,7 +111,7 @@ class Artist
         return $this;
     }
 
-    public function removeFollower(user $follower): self
+    public function removeFollower(User $follower): self
     {
         $this->follower->removeElement($follower);
 

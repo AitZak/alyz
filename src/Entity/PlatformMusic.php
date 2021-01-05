@@ -3,15 +3,19 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\PlatformMusicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+
 
 /**
  * @ApiResource
  * @ORM\Entity(repositoryClass=PlatformMusicRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","name": "partial"})
  */
 class PlatformMusic
 {
@@ -38,7 +42,7 @@ class PlatformMusic
     private $charts;
 
     /**
-     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="subscribedPlatforms")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="subscribedPlatforms")
      */
     private $subscriber;
 
@@ -136,7 +140,7 @@ class PlatformMusic
         return $this->subscriber;
     }
 
-    public function addSubscriber(user $subscriber): self
+    public function addSubscriber(User $subscriber): self
     {
         if (!$this->subscriber->contains($subscriber)) {
             $this->subscriber[] = $subscriber;
@@ -145,7 +149,7 @@ class PlatformMusic
         return $this;
     }
 
-    public function removeSubscriber(user $subscriber): self
+    public function removeSubscriber(User $subscriber): self
     {
         $this->subscriber->removeElement($subscriber);
 
