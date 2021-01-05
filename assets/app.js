@@ -37,7 +37,7 @@ const App = () => {
     }}>
     <HashRouter>
         <NavbarWithRouter />
-        <main className="container-fluid pt-5">
+        <main className="container pt-5">
             <Switch>
                 <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
