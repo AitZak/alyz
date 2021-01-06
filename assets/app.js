@@ -18,6 +18,7 @@ import AuthApi from "./services/authAPI";
 import AuthContext from "./contexts/AuthContext";
 import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import SpotifyAuthorization from "./services/SpotifyApi/SpotifyAuthorization";
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import RegisterPage from './pages/RegisterPage';
@@ -41,6 +42,7 @@ const App = () => {
         <NavbarWithRouter />
         <main className="container pt-5">
             <Switch>
+                <Route path="/spotify-authorization" component={SpotifyAuthorization} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
                 <PrivateRoute path="/users" component = {AllUsersPage} />
