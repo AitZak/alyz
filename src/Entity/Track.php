@@ -33,6 +33,11 @@ class Track
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $cover;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $isrc;
 
     /**
@@ -78,6 +83,18 @@ class Track
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }
@@ -156,7 +173,7 @@ class Track
         return $this;
     }
 
-
+    
 
     /**
      * @return Collection|TracksPlaylistUser[]
