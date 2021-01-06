@@ -2,12 +2,10 @@ html, body {
     margin: 0;
     height: 100%;
     font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-    background-attachment: fixed;
 }
 
-.link_color{
-    color: #000000 !important;
+body {
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
 
 .navbar_title{
@@ -21,18 +19,6 @@ html, body {
 
 .slogan{
     font-size: 10px;
-}
-
-.homepage_title{
-
-}
-
-.playlist_title{
-
-}
-
-.logo_font{
-    font-family: 'Lobster', cursive !important;
 }
 
 .button_custum{
@@ -67,4 +53,3 @@ html, body {
     margin: 5px 5px 5px;
     text-decoration: none;
 }
-
