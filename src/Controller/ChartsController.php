@@ -17,7 +17,7 @@ use APP\Repository\ChartRepository;
 
 class ChartsController {
     /**
-    * @Route("/api/chart_tracks", methods={"GET"}, name="my_api_custom_data")
+    * @Route("/api/chart_tracks", methods={"GET"}, name="custom_endpoint_tracks_chart")
     */
     public function getTrackCharts(Request $request, EntityManagerInterface $entityManager)
     {
