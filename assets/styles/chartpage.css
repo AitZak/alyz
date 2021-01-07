@@ -1,0 +1,33 @@
+body{
+    color: #ffffff !important;
+}
+
+.title_chart_spotify{
+    font-family: 'Lobster', cursive !important;
+    font-size: 2.5rem;
+    color: #1ed760;
+}
+/*#E2D3D3 #707070*/
+
+.title_chart_deezer{
+    font-family: 'Lobster', cursive !important;
+    font-size: 2.5rem;
+    color: #ff0092;
+}
+
+.chart{
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+.color{
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.title_group{
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+

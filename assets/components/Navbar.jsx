@@ -13,13 +13,13 @@ const Navbar = ({ history}) => {
   }
 
     return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <NavLink className="navbar-brand" to="/">ALYZ</NavLink>
+    <NavLink className="navbar-brand navbar_title" to="/">MUSICALYZ  </NavLink>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
   
     <div className="collapse navbar-collapse" id="navbarColor03">
-      <ul className="navbar-nav mr-auto">
+      <ul className="navbar-nav mr-nav">
         <li className="nav-item active">
           <NavLink className="nav-link" to="/">Home
             <span className="sr-only">(current)</span>
@@ -31,9 +31,7 @@ const Navbar = ({ history}) => {
         <li className="nav-item">
           <NavLink className="nav-link" to="/charts_deezer">Les tendances Deezer</NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="#">Les tendances YouTube</NavLink>
-        </li>
+
         <li className="nav-item">
           <NavLink className="nav-link" to="/users">Les utilisateurs</NavLink>
         </li>
@@ -41,17 +39,17 @@ const Navbar = ({ history}) => {
           <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
       </ul>
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav mr-nav space">
         {!isAuthenticated && <>
           <li className="nav-item">
-              <NavLink to="/register" className="btn btn-default">Inscription</NavLink>
+              <NavLink to="/register" className="btn btn-default button_custum">Inscription</NavLink>
           </li>
           <li className="nav-item">
-              <NavLink to="/login" className="btn btn-default">Connexion</NavLink>
+              <NavLink to="/login" className="btn btn-default button_custum">Connexion</NavLink>
           </li>
         </> || (
           <li className="nav-item">
-              <button onClick={handleLogout} className="btn btn-default">Déconnexion</button>
+              <button onClick={handleLogout} className="btn btn-default button_custum">Déconnexion</button>
           </li>
         )}
       </ul>

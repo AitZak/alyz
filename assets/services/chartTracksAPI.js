@@ -3,27 +3,27 @@ import axios from 'axios';
 
 function findAllCountries() {
     return axios
-    .get("http://localhost/api/countries")
-    .then(response => response.data['hydra:member']);
+        .get("https://alyz.dev-raza.fr/api/countries")
+        .then(response => response.data['hydra:member']);
 }
 
 function findAllTrackSpotify(dateSelected = getPreviousDate() ,country = "fr") {
     return axios
-    .get("http://localhost:80/api/chart_tracks?date="+ dateSelected+"&id_platform=4&id_country="+country)
-    .then(response => response.data);
+        .get("https://alyz.dev-raza.fr/api/chart_tracks?date="+ dateSelected+"&id_platform=1&id_country="+country)
+        .then(response => response.data);
 }
 
 function findAllTrackDeezer(dateSelected = getPreviousDate() ,country = "fr") {
     return axios
-    .get("http://localhost:80/api/chart_tracks?date="+ dateSelected+"&id_platform=7&id_country="+country)
-    .then(response => response.data);
+        .get("https://alyz.dev-raza.fr/api/chart_tracks?date="+ dateSelected+"&id_platform=2&id_country="+country)
+        .then(response => response.data);
 }
 
 
 function getAllDates() {
     return axios
-    .get("http://localhost/api/date_charts")
-    .then(response => response.data);
+        .get("https://alyz.dev-raza.fr/api/date_charts")
+        .then(response => response.data);
 }
 
 function getPreviousDate() {
