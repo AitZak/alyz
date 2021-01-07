@@ -26,16 +26,13 @@ const Navbar = ({ history}) => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/spotify_authorization">Connect to Spotify</NavLink>
+          <NavLink className="nav-link" to="/spotify_authorization">Vos Playlists Spotify</NavLink>
         </li>
         <li className="nav-item">
             <NavLink className="nav-link" to="/charts_spotify">Les tendances Spotify</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/charts_deezer">Les tendances Deezer</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="#">Les tendances YouTube</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/users">Les utilisateurs</NavLink>

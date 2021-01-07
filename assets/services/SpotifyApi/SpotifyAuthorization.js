@@ -81,7 +81,6 @@ function getUserInfo(token) {
         },
     }).then(response => {
         let playlists;
-        // console.log(response.data.items);
         return playlists =  response.data.items;
     })
 
