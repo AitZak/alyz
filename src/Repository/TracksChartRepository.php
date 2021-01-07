@@ -19,22 +19,16 @@ class TracksChartRepository extends ServiceEntityRepository
         parent::__construct($registry, TracksChart::class);
     }
 
-    // /**
-    //  * @return TracksChart[] Returns an array of TracksChart objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getDateCharts()
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->select("t.publication_date")
+            ->groupBy("t.publication_date")
+            ->orderBy("t.publication_date", 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getArrayResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?TracksChart
