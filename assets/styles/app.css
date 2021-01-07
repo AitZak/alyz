@@ -6,10 +6,6 @@ html, body {
     background-attachment: fixed;
 }
 
-body {
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-}
-
 .navbar_title{
     font-family: 'Lobster', cursive !important;
     font-size: 1.2rem;
@@ -32,6 +28,23 @@ body {
 
 }
 
+.playlist_tile{
+    font-family: 'Lobster', cursive !important;
+    font-size: 2.5rem;
+    color: #E2D3D3;
+}
+
+.playlist_name{
+    color: #E2D3D3;
+    font-size: 2vw;
+}
+
+
+.beta{
+    font-size: 5px;
+    color: #ff0010;
+}
+
 .space{
     margin-left: 20px !important;
 }
@@ -39,10 +52,13 @@ body {
 .btn{
     margin-right: 5px !important;
 }
+/* ==========================================================================
 
 .btn:last-child{
     margin-right: 0 !important;
 }
+
+ */
 
 .color{
     color: white !important
@@ -54,6 +70,11 @@ body {
     padding: 5px 5px 5px;
     margin: 5px 5px 5px;
     text-decoration: none;
+}
+
+.beta{
+    font-size: 0.9rem;
+    color: #f93e3e;
 }
 
 .playlist_title{
