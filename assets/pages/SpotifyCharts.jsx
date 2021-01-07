@@ -8,7 +8,7 @@ const SpotifyCharts = props => {
     const [tracks, setChart] = useState([]);
     const [countries, setCountries] = useState([]);
     const [filter, setFilter] = useState({
-        country: "de",
+        country: "fr",
         dateSelected: ChartTracksAPI.getPreviousDate()
     });
 
