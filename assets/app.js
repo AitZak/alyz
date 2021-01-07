@@ -14,6 +14,7 @@ import AllUsersPage from "./pages/AllUsersPage";
 import SpotifyCharts from "./pages/SpotifyCharts";
 import DeezerCharts from "./pages/DeezerCharts";
 import LoginPage from "./pages/LoginPage";
+import SpotifyAuthorizationPage from "./pages/SpotifyAuthorizationPage";
 import AuthApi from "./services/authAPI";
 import AuthContext from "./contexts/AuthContext";
 import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
@@ -41,6 +42,7 @@ const App = () => {
         <NavbarWithRouter />
         <main className="container pt-5">
             <Switch>
+                <Route path="/spotify_authorization" component={SpotifyAuthorizationPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
                 <PrivateRoute path="/users" component = {AllUsersPage} />

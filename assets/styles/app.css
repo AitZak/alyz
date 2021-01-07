@@ -2,6 +2,8 @@ html, body {
     margin: 0;
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    background-attachment: fixed;
 }
 
 body {
@@ -52,4 +54,22 @@ body {
     padding: 5px 5px 5px;
     margin: 5px 5px 5px;
     text-decoration: none;
+}
+
+.playlist_title{
+    font-family: 'Lobster', cursive !important;
+    font-size: 2.5rem;
+    color: #E2D3D3;
+}
+
+.playlist_name{
+    color: #E2D3D3;
+    font-size: 2vw;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
