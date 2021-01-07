@@ -1,0 +1,111 @@
+.login{
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 0.30rem;
+    flex-direction: column;
+    display: flex;
+    background-clip: border-box;
+    border: 1px solid;
+
+}
+
+.form_custum{
+    width:50% !important;
+    margin:0 auto !important;
+}
+
+.title {
+    font-size: 24px;
+    color: #525252;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.text-color-form{
+    color: #E2D3D3 !important;
+}
+
+.form-control{
+    color: #000000 !important;
+}
+
+.p-t-100 {
+    padding-top: 100px;
+}
+
+.p-t-130 {
+    padding: 10px 0;
+    float: none;
+}
+
+.p-t-180 {
+    padding-top: 180px;
+}
+
+.p-t-20 {
+    padding-top: 20px;
+}
+
+.p-t-15 {
+    padding-top: 15px;
+}
+
+.p-t-10 {
+    padding-top: 10px;
+}
+
+.p-t-30 {
+    padding-top: 30px;
+}
+
+.p-b-100 {
+    padding-bottom: 100px;
+}
+
+.m-r-45 {
+    margin-right: 45px;
+}
+
+/* ==========================================================================
+   #WRAPPER
+   ========================================================================== */
+.wrapper {
+    margin: 0 auto;
+}
+
+.wrapper--w960 {
+    max-width: 960px;
+}
+
+.wrapper--w780 {
+    max-width: 780px;
+}
+
+.wrapper--w680 {
+    max-width: 680px;
+}
+
+.card-4 {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+.card-body {
+    padding: 2.25rem !important;
+}
+@media (max-width: 767px) {
+    .card-4 .card-body {
+        padding: 50px 40px;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+
+h2 {
+    font-size: 3rem;
+}
