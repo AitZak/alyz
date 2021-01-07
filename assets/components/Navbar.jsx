@@ -19,17 +19,17 @@ const Navbar = ({ history}) => {
     </button>
   
     <div className="collapse navbar-collapse" id="navbarColor03">
-      <ul className="navbar-nav mr-nav navbar_title">
+      <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
           <NavLink className="nav-link" to="/">Home
             <span className="sr-only">(current)</span>
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="#">Les tendances Spotify</NavLink>
+          <NavLink className="nav-link" to="/charts_spotify">Les tendances Spotify</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="#">Les tendances Deezer</NavLink>
+          <NavLink className="nav-link" to="/charts_deezer">Les tendances Deezer</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="#">Les tendances YouTube</NavLink>
@@ -41,17 +41,17 @@ const Navbar = ({ history}) => {
           <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
       </ul>
-      <ul className="navbar-nav ">
+      <ul className="navbar-nav ml-auto">
         {!isAuthenticated && <>
-          <li className="nav-item mr-1">
-              <NavLink to="/register" className="btn space button_custum color">Inscription</NavLink>
-          </li>      
-          <li className="nav-item color">
-              <NavLink to="/login" className="btn btn-default button_custum color">Connexion</NavLink>
+          <li className="nav-item">
+              <NavLink to="/register" className="btn btn-default">Inscription</NavLink>
+          </li>
+          <li className="nav-item">
+              <NavLink to="/login" className="btn btn-default">Connexion</NavLink>
           </li>
         </> || (
           <li className="nav-item">
-              <button onClick={handleLogout} className="btn btn-default button_custum color">Déconnexion</button>
+              <button onClick={handleLogout} className="btn btn-default">Déconnexion</button>
           </li>
         )}
       </ul>

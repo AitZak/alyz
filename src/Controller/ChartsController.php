@@ -17,7 +17,7 @@ use APP\Repository\ChartRepository;
 
 class ChartsController {
     /**
-    * @Route("/api/chart_tracks", methods={"GET"}, name="custom_endpoint_tracks_chart")
+    * @Route("/api/chart_tracks", methods={"GET"}, name="my_api_custom_data")
     */
     public function getTrackCharts(Request $request, EntityManagerInterface $entityManager)
     {
@@ -45,19 +45,31 @@ class ChartsController {
             $artistSing = $entityManager->getRepository(Artist::class)->findOneBy([
                 'id' => $sing->getArtistId(),
             ]);
-            
+
 
             array_push($output,["position"=>$track->getPosition(),
                                 "title" => $trackInfo->getTitle(),
                                 "artist" => $artistSing->getName(),
                                 "cover" => $trackInfo->getCover(),
-                                
+
             ]);
         }
-        
+
 
         $response = new JsonResponse();
         $response->setData($output);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+    * @Route("/api/date_charts", methods={"GET"}, name="get_date")
+    */
+    public function getDateCharts(Request $request, EntityManagerInterface $entityManager)
+    {
+        $trackInfo = $entityManager->getRepository(TracksChart::class)->getDateCharts();
+        $response = new JsonResponse();
+        $response->setData($trackInfo);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
 

@@ -8,10 +8,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from "./components/Navbar";
-import Footer  from "./components/Footer"
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import AllUsersPage from "./pages/AllUsersPage";
+import SpotifyCharts from "./pages/SpotifyCharts";
+import DeezerCharts from "./pages/DeezerCharts";
 import LoginPage from "./pages/LoginPage";
 import AuthApi from "./services/authAPI";
 import AuthContext from "./contexts/AuthContext";
@@ -20,6 +21,7 @@ import PrivateRoute from './components/PrivateRoute';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import RegisterPage from './pages/RegisterPage';
+
 
 
 AuthApi.setup();
@@ -37,20 +39,19 @@ const App = () => {
     }}>
     <HashRouter>
         <NavbarWithRouter />
-        <main className="container-fluid pt-5">
+        <main className="container pt-5">
             <Switch>
                 <Route path="/login" component={LoginPage} />
                 <Route path="/contact" component={ContactPage} />
                 <PrivateRoute path="/users" component = {AllUsersPage} />
+                <Route path="/charts_spotify" component = {SpotifyCharts} />
+                <Route path="/charts_deezer" component = {DeezerCharts} />
                 <Route path="/register" component = {RegisterPage} />
-                <Route path="/" component={HomePage} />          
+                <Route path="/" component={HomePage} />
             </Switch>
-
         </main>
-        <Footer/>
     </HashRouter>
     </AuthContext.Provider>
-
     );
 };
 
