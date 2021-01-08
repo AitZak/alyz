@@ -1,0 +1,7 @@
+App\Entity\User:
+    user_{1..100}:
+        isbn: <isbn13()>
+        email: <email()>
+        lastname: <name()>
+        firstname: <name()>
+        password: <password()>
